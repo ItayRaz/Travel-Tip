@@ -56,3 +56,11 @@ function renderWeather(weather) {
     document.querySelector('.weather-stats').innerHTML = strHTML;
 }
 
+document.querySelector('.search-btn').onclick = () => {
+    let searchVal = document.querySelector('.search').value;
+    locService.getLocBySearch(searchVal)
+        .then(res => {
+            mapService.panTo(res);
+            mapService.addMarker(res);
+        })
+};

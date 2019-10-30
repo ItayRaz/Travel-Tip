@@ -1,7 +1,8 @@
 
 export default {
     getLocs,
-    getPosition
+    getPosition,
+    getLocBySearch
 }
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
@@ -27,3 +28,20 @@ function getPosition() {
             }
         })
 }
+
+function getLocBySearch(str) {
+    let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${str}&key=AIzaSyCbhn96qgXx4hd50UPQZexxY5UqPA8jBuQ`
+    let prmRes = axios.get(apiUrl)
+        let loc= prmRes.then(res => {
+        return {
+            lat : res.data.results[0].geometry.location.lat,
+            lng: res.data.results[0].geometry.location.lng
+        }
+    })
+    return loc
+}
+
+// let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=tel+aviv&key=AIzaSyCbhn96qgXx4hd50UPQZexxY5UqPA8jBuQ`
+//     let prmRes = axios.get(apiUrl) 
+//         .then(res => console.log(res)
+//         );
