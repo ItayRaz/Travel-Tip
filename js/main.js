@@ -8,6 +8,7 @@ import weatherService from './services/weather.service.js';
 let gCurrCoords = { lat: 32.0749831, lng: 34.9120554 };
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('myParam');
+
 if(myParam) {
     gCurrCoords=myParam;
 }
@@ -19,7 +20,7 @@ locService.getLocs()
 
 
 window.onload = () => {
-    mapService.initMap()
+    mapService.initMap(gCurrCoords.lat, gCurrCoords.lng)
         .then(() => {
             mapService.addMarker( gCurrCoords);
             getWeather( gCurrCoords )
