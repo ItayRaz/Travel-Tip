@@ -6,6 +6,11 @@ import weatherService from './services/weather.service.js';
 
 
 let gCurrCoords = { lat: 32.0749831, lng: 34.9120554 };
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('myParam');
+if(myParam) {
+    gCurrCoords=myParam;
+}
 
 
 locService.getLocs()
@@ -16,8 +21,8 @@ locService.getLocs()
 window.onload = () => {
     mapService.initMap()
         .then(() => {
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-            getWeather({ lat: 32.0749831, lng: 34.9120554 })
+            mapService.addMarker( gCurrCoords);
+            getWeather( gCurrCoords )
 
         })
         .catch(console.log('INIT MAP ERROR'));
@@ -32,7 +37,7 @@ window.onload = () => {
         })
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
+document.querySelector('.my-pos-btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     let coords = locService.getPosition();
         coords.then((res) => {
@@ -70,9 +75,17 @@ document.querySelector('.search-btn').onclick = () => {
         })
 };
 
+document.querySelector('.copy-btn').onclick = () => {
+    getLocLink()
+};
+
 
 
 function getLocLink() {
-    let locUrl = `https://itayraz.github.io/Travel-Tip?lat=${gCurrCoords.lat}&lng=${gCurrCoords}`
-    
+    let locUrl = `https://itayraz.github.io/Travel-Tip?lat=${gCurrCoords.lat}&lng=${gCurrCoords.lng}`
+    let elLocUrl = document.querySelector('.url') 
+    elLocUrl.value= locUrl;
+    elLocUrl.select();
+    elLocUrl.setSelectionRange(0, 99999);
+    document.execCommand("copy");
 }
