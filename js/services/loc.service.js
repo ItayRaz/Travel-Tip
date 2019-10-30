@@ -41,7 +41,3 @@ function getLocBySearch(str) {
     return loc
 }
 
-// let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=tel+aviv&key=AIzaSyCbhn96qgXx4hd50UPQZexxY5UqPA8jBuQ`
-//     let prmRes = axios.get(apiUrl) 
-//         .then(res => console.log(res)
-//         );

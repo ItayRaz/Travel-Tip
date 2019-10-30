@@ -6,8 +6,6 @@ export default {
     getWeatherByLocation
 }
 
-
-
 function getWeatherByLocation(lat,lng){
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&APPID=${W_KEY}&units=metric`
     var res = axios.get(apiUrl)
