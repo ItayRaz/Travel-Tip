@@ -28,5 +28,9 @@ window.onload = () => {
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
-    mapService.panTo(35.6895, 139.6917);
-})
+    let coords = locService.getPosition();
+        coords.then((res) => {
+            mapService.panTo(res)
+            mapService.addMarker(res)
+        })
+    })

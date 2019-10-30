@@ -15,11 +15,16 @@ function getLocs() {
 
 }
 
-
 function getPosition() {
     console.log('Getting Pos');
 
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
+        .then(res => {
+            return {
+                lat: res.coords.latitude,
+                lng: res.coords.longitude
+            }
+        })
 }
