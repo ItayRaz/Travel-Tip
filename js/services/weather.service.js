@@ -19,12 +19,10 @@ function getWeatherByLocation(lat,lng){
             max_temp: res.data.main.temp_max, 
             humidity: res.data.main.humidity,
             text: res.data.weather[0].description,
-            name: res.data.name
+            name: res.data.name,
+            // icon: res.data.weather.icon
         }
     })
 return res
 }
-
-
-
 

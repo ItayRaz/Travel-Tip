@@ -9,18 +9,17 @@
   </head>
   <body>
     <header>
-      <h1>ES6</h1>
+      <h1>Itay's & Nimrod's Travel App</h1>
     </header>
-    <section>
-      <div id="map" style="width: 100%; height: 400px;"></div>
-      <div class="weather-container">
-        <div>Weather in : <span class="city-name"></span></div>
-        <div class="weather"></div>
-        <div class="temp"></div>
-        <div class="country"></div>
-      </div>
-      <button class="btn">Click Me</button>
-    </section>
+    <section class="app-container flex justify-content">
+      <div id="map" style="width: 700px; height: 400px;"></div>
+      <div class="inner-container">
+            <ul class="weather-stats">
+            </ul>
+            <button class="btn">My Location</button>
+        </div>
+    </div>
+  </section>
 
     <script src="lib/axios.js"></script>
     <script type="module" src="js/main.js"></script>

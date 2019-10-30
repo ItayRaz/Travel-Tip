@@ -15,7 +15,7 @@ window.onload = () => {
     mapService.initMap()
         .then(() => {
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-            // mapService.renderWeather(latLng.lat, latLng.lng)
+            getWeather({ lat: 32.0749831, lng: 34.9120554 })
 
         })
         .catch(console.log('INIT MAP ERROR'));
@@ -36,5 +36,23 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
         coords.then((res) => {
             mapService.panTo(res)
             mapService.addMarker(res)
+            getWeather(res)
         })
     })
+
+
+function getWeather(coords) {
+    weatherService.getWeatherByLocation(coords.lat, coords.lng)
+        .then(res => {
+            renderWeather(res);
+        })
+}
+
+
+function renderWeather(weather) {
+    var strHTML = `
+        <h4><span>${weather.name}<h4>
+        <h5>${weather.text} with ${weather.temp}°C and ${weather.humidity}% humidity</span></h5>`
+    document.querySelector('.weather-stats').innerHTML = strHTML;
+}
+
