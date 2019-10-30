@@ -4,26 +4,16 @@ import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
 import weatherService from './services/weather.service.js';
 
-
 let gCurrCoords = { lat: 32.0749831, lng: 34.9120554 };
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('myParam');
-
-if(myParam) {
-    gCurrCoords=myParam;
-}
-
-
-locService.getLocs()
-    .then(locs => console.log('locs', locs))
-
 
 
 window.onload = () => {
+    if(getParams()) gCurrCoords = getParams();
+    
     mapService.initMap(gCurrCoords.lat, gCurrCoords.lng)
         .then(() => {
-            mapService.addMarker( gCurrCoords);
-            getWeather( gCurrCoords )
+            mapService.addMarker(gCurrCoords);
+            getWeather(gCurrCoords)
 
         })
         .catch(console.log('INIT MAP ERROR'));
@@ -41,13 +31,13 @@ window.onload = () => {
 document.querySelector('.my-pos-btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     let coords = locService.getPosition();
-        coords.then((res) => {
-            mapService.panTo(res)
-            mapService.addMarker(res)
-            getWeather(res)
-            gCurrCoords = res;
-        })
+    coords.then((res) => {
+        mapService.panTo(res)
+        mapService.addMarker(res)
+        getWeather(res)
+        gCurrCoords = res;
     })
+})
 
 
 function getWeather(coords) {
@@ -84,9 +74,25 @@ document.querySelector('.copy-btn').onclick = () => {
 
 function getLocLink() {
     let locUrl = `https://itayraz.github.io/Travel-Tip?lat=${gCurrCoords.lat}&lng=${gCurrCoords.lng}`
-    let elLocUrl = document.querySelector('.url') 
-    elLocUrl.value= locUrl;
+    let elLocUrl = document.querySelector('.url')
+    elLocUrl.value = locUrl;
     elLocUrl.select();
     elLocUrl.setSelectionRange(0, 99999);
     document.execCommand("copy");
+}
+
+
+
+function getParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('lat');
+    const myParam2 = urlParams.get('lng');
+    if (myParam && myParam2) {
+        return {
+            lat: +myParam,
+            lng: +myParam2
+        }
+
+    }
+    return false
 }
