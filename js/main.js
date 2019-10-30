@@ -38,3 +38,12 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
             mapService.addMarker(res)
         })
     })
+
+document.querySelector('.search-btn').onclick = () => {
+    let searchVal = document.querySelector('.search').value;
+    locService.getLocBySearch(searchVal)
+        .then(res => {
+            mapService.panTo(res);
+            mapService.addMarker(res);
+        })
+};
