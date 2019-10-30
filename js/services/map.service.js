@@ -32,9 +32,9 @@ function addMarker(loc) {
     return marker;
 }
 
-function panTo(lat, lng) {
-    var laLatLng = new google.maps.LatLng(lat, lng);
-    map.panTo(laLatLng);
+function panTo(coords) {
+    var laLatLng = new google.maps.LatLng(coords.lat, coords.lng);
+        map.panTo(laLatLng);
 }
 
 function _connectGoogleApi() {
