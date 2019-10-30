@@ -5,6 +5,8 @@ import mapService from './services/map.service.js'
 import weatherService from './services/weather.service.js';
 
 
+let gCurrCoords = { lat: 32.0749831, lng: 34.9120554 };
+
 
 locService.getLocs()
     .then(locs => console.log('locs', locs))
@@ -37,6 +39,7 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
             mapService.panTo(res)
             mapService.addMarker(res)
             getWeather(res)
+            gCurrCoords = res;
         })
     })
 
@@ -62,5 +65,14 @@ document.querySelector('.search-btn').onclick = () => {
         .then(res => {
             mapService.panTo(res);
             mapService.addMarker(res);
+            getWeather(res)
+            gCurrCoords = res;
         })
 };
+
+
+
+function getLocLink() {
+    let locUrl = `https://itayraz.github.io/Travel-Tip?lat=${gCurrCoords.lat}&lng=${gCurrCoords}`
+    
+}
