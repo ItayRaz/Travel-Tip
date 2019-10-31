@@ -3,7 +3,8 @@
 const W_KEY = '520ce1d06c3e82b49699fce4f4b7846c'
 
 export default {
-    getWeatherByLocation
+    getWeatherByLocation,
+    getWeather
 }
 
 function getWeatherByLocation(lat,lng){
@@ -24,3 +25,9 @@ function getWeatherByLocation(lat,lng){
 return res
 }
 
+function getWeather(coords) {
+    weatherService.getWeatherByLocation(coords.lat, coords.lng)
+        .then(res => {
+            renderWeather(res);
+        })
+}
