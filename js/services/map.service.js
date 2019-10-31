@@ -24,10 +24,12 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc) {
+    let icon = "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/48/Map-Marker-Flag-1-Left-Pink-icon.png";
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
-        title: 'Hello World!'
+        title: 'Hello World!',
+        icon: icon
     });
     return marker;
 }
